@@ -1,0 +1,9 @@
+# Arquivos e pastas do IRIS que não precisam ir pro Git
+*.log
+*.obj
+*.dat
+*.lst
+*.int
+*.gbl
+.DS_Store
+.vscode/
