@@ -10,7 +10,7 @@ ClassMethod Gravar(nome As %String, idade As %Numeric) As %Status
     Try {
         Do pessoa.%Save()
     W !
-    W "Registro Gravado com Sucesso!"
+    W "Registro Gravado com Sucesso!", !
 
    
    }
@@ -34,6 +34,7 @@ ClassMethod Listar()
     // Se não houver registros
     If result.%ROWCOUNT = 0{
         W "Nenhum registro encontrado.", !
+        W !, "Total de registros: ", result.%ROWCOUNT, !!
         Quit
     }
 
