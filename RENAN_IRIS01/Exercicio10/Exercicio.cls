@@ -25,27 +25,46 @@ ClassMethod Listar()
     W !, "=== LISTAGEM DE PESSOAS CADASTRADAS ===", !!
 
     // Busca todos os registros da classe Pessoa
-    Set pessoas = ##class(ExerciciosIris.Exercicio10.Pessoa).%OpenId(0)
     Set tQuery = ##class(%SQL.Statement).%New()
     Set sql = "SELECT ID, Idade, Nome FROM ExerciciosIris_Exercicio10.Pessoa"
     Set r = tQuery.%Prepare(sql)
     Set result = tQuery.%Execute()
 
-    // Se não houver registros
-    If result.%ROWCOUNT = 0{
-        W "Nenhum registro encontrado.", !
-        W !, "Total de registros: ", result.%ROWCOUNT, !!
-        Quit
-    }
-
+    Set count = 0
     While result.%Next(){
-        W "ID: ", result.ID, !
-        W "Nome: ", result.Nome, !
-        W "Idade: ", result.Idade, !
-        W "------------------------------------", !
-    }
+        Set count = count+1
 
-    W !, "Total de registros: ", result.%ROWCOUNT, !!
+        W "ID [", result.%Get("ID")_ "] - "
+        W result.%Get("Nome")_ " | "
+        If result.%Get("Idade") > 1{
+            W result.%Get("Idade")_ " anos "
+        } Else {
+            W result.%Get("Idade")_ " ano"
+        }
+        W !
+    }
+        W "------------------------------------", !
+        If count = 0{
+            W "Nenhum registro encontrado."
+        }Else{
+            W "Registros encontrados: "_ count
+        }
+
+    // Se não houver registros
+    //If result.%ROWCOUNT = 0{
+    //    W "Nenhum registro encontrado.", !
+    //    W !, "Total de registros: ", result.%ROWCOUNT, !!
+    //    Quit
+    //}
+
+    //While result.%Next(){
+    //    W "ID: ", result.ID, !
+    //    W "Nome: ", result.Nome, !
+    //    W "Idade: ", result.Idade, !
+    //    W "------------------------------------", !
+    //}
+
+    //W !, "Total de registros: ", result.%ROWCOUNT, !!
 }
 
 ClassMethod ExibeInfo()
