@@ -1,25 +1,27 @@
 Class ExerciciosIris.Exercicio7 Extends %RegisteredObject
 {
 
-/// Description
-ClassMethod Resultado(a As %Numeric, b As %Numeric) As %Numeric
+ClassMethod Resultado(a As %Numeric, b As %Numeric) As %Status
 {
-    Quit (a+b)
+    Set a = 0
+    Set b = 0
+    Set res = a+b
 }
 
-ClassMethod Soma(a As %Numeric = 0, b As %Numeric = 0) As %Status
+/// Description
+ClassMethod Soma()
 {
     
     Try{
         W "=== Rotina de Soma ===", !
         W "N1: ", a, !
-        W "N2: ", a, !
+        W "N2: ", b, !
         Set resultado = ..Resultado(a, b)
         W "Reultado da soma: "_ resultado
-        Quit $$$OK
+        //Quit $$$OK
     }Catch ex{
         W "Erro 5001: "_ ex.DisplayString()
-        Quit ex.AsStatus()
+        //Quit ex.AsStatus()
     }
 }
 
